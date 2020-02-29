@@ -1,0 +1,160 @@
+.grid-services {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(10, 100px);
+}
+
+.custom-scrollbar {
+  overflow-x: auto;
+}
+::ng-deep .inputVar .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+::ng-deep .inputVar .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #a5a5a5;
+}
+
+input[type="checkbox"][id^="cb"] {
+  display: none;
+}
+
+label:before {
+  background-color: white;
+  color: white;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid #254c71;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 27px;
+  transition-duration: 0.4s;
+  margin-top: -15px;
+  margin-left: -15px;
+  transform: scale(0);
+}
+
+label img {
+  width: 100%;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+:checked + label {
+  border-color: #ddd;
+}
+
+:checked + label:before {
+  content: "✓";
+  z-index: 1;
+  align-content: center;
+  background-color: #254c71;
+  color: lime;
+  transform: scale(1);
+}
+
+:checked + label img {
+  transform: scale(0.9);
+  box-shadow: 0 0 5px #333;
+  z-index: -1;
+}
+
+.grid-item label {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.hover-card {
+  border-radius: 10px;
+  background-color: #f5f7fb;
+}
+
+.hover-card:hover {
+  border-radius: 10px;
+  background-color: #dbdde1;
+  cursor: pointer;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #254c71 !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #254c71 !important;
+}
+
+.btn-custom {
+  background-color: #254c71;
+  color: white;
+  max-width: 200px;
+  width: 100%;
+  outline: none !important;
+}
+
+
+.bg-red {
+  background-color: red;
+}
+
+
+.inputTest:focus {
+  outline: none !important;
+}
+
+::ng-deep .mat-horizontal-content-container {
+  height: 100%;
+}
+
+::ng-deep .mat-form-field-infix {
+
+}
+
+button:focus {
+  outline: none !important;
+}
+
+.no-outline {
+  box-shadow: none !important;
+}
+
+.var-bg {
+  background-color: #e8e8e8;
+  padding-right: 5px;
+  border-radius: 3Px;
+  height: 23px
+}
+
+.var-img {
+  height: 19px;
+  width: 19px;
+  margin-bottom: 5px;
+  margin-left: 1px;
+  margin-right: 5px;
+  border-radius: 3px
+}
+
+::ng-deep .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content{
+  display: inline-block !important;
+}

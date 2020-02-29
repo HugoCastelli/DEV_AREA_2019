@@ -1,0 +1,100 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('src/assets/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('src/assets/fonts/poppins/Poppins-Bold.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('src/assets/fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: Raleway-Regular;
+  src: url('src/assets/fonts/raleway/Raleway-Regular.ttf');
+}
+
+@font-face {
+  font-family: Raleway-Black;
+  src: url('src/assets/fonts/raleway/Raleway-Black.ttf');
+}
+
+@font-face {
+  font-family: Raleway-SemiBold;
+  src: url('src/assets/fonts/raleway/Raleway-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: Raleway-Bold;
+  src: url('src/assets/fonts/raleway/Raleway-Bold.ttf');
+}
+
+@font-face {
+  font-family: Proxima Nova;
+  src: url('src/assets/fonts/NovaA.ttf');
+}
+
+.font-proxima {
+  font-family: Proxima Nova;
+}
+
+.font-roboto {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bg-gradient {
+  background: #254c71;
+  height: 250px;
+  margin-top: -77px;
+}
+
+.text-bleu-custom {
+  color:  #254c71;
+}
+
+@media only screen and (min-width: 901px) {
+  .bg-gradient {
+    border-bottom-left-radius: 180px
+  }
+}
+
+.bg-lightblue {
+  background-color: lightblue;
+  color: white;
+}
+
+.var-bg {
+  background-color: #e8e8e8;
+  padding-right: 5px;
+  border-radius: 3Px;
+  height: 23px
+}
+
+.var-img {
+  height: 19px;
+  width: 19px;
+  margin-bottom: 5px;
+  margin-left: 1px;
+  margin-right: 5px;
+  border-radius: 3px
+}
+
+.content-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}

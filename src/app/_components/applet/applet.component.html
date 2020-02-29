@@ -1,0 +1,269 @@
+<div style="background-color: #f5f7fb">
+  <div class="bg-gradient"></div>
+  <div class="container p-3" style="margin-top: -80px">
+    <div style="min-height: 700px; border-radius: 20px" class="w-100 bg-white shadow p-4 mb-3">
+      <mat-horizontal-stepper linear labelPosition="bottom" #stepper class="w-100">
+        <mat-step [editable]="isEditable">
+          <ng-template matStepLabel>Services action</ng-template>
+          <div class="row mt-3">
+            <div class="col-sm-5 w-100 p-3 grid-services custom-scrollbar"
+                 style="background-color: #f5f7fb; height: 520px; border-radius: 20px">
+              <div *ngFor="let each of this.services_activated; let i = index" class="grid-item h-100 text-center">
+                <input (click)="selectServices(each)" type="checkbox" [id]="'cb' + i" [disabled]="isDisabled.disabled === true && isDisabled.name !== each" />
+                <label [for]="'cb' + i" class="text-center" style="margin-top: 17px">
+                  <img style="height: 60px; width: 60px; border-radius: 20px" [src]="'assets/services/' + each + '.png'" alt/>
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-2 w-100 text-center" style="background-color: white; height: 450px; position: relative">
+              <i style="font-size: 30px; color: #254c71; position: absolute; top: 50%; transform: translateY(-50%) translateX(-50%)" class="fas fa-arrow-right"></i>
+            </div>
+            <div class="col-sm-5 w-100 custom-scrollbar" style="height: 520px;">
+
+              <div *ngIf="this.actions === undefined" class="text-center h-100"
+                   style="display: flex; align-items: center; justify-content: center">
+                <div class="row" style="color: #8f8f8f">
+                  <div class="col-lg-12">
+                    <mat-icon>info</mat-icon>
+                  </div>
+                  <div class="col-lg-12">
+                    Please select services
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="this.actions !== undefined && this.actions !== null">
+                <div *ngFor="let each of this.actions" (click)="selectActions(each.name); stepper.next()" class="w-100 shadow p-3 mb-3 hover-card">
+                  <div class="font-proxima" style="font-size: 22px; color: #6a6a6a">{{formatTitle(each.name)}}</div>
+                  <div>{{each.description}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step [editable]="isEditable" class="h-100">
+          <ng-template matStepLabel>Action configuration</ng-template>
+
+          <div class="h-100 ml-auto mr-auto mt-5" style="max-width: 550px;">
+            <form #f="ngForm" class="position-relative" style="min-height: 470px" (ngSubmit)="f.valid && onSubmit(f)">
+              <h4 class="font-proxima mb-4">Input configuration : {{this.isDisabled.name | titlecase}}</h4>
+              <div *ngFor="let each of this.action_input; let i = index">
+
+                <div class="w-100" *ngIf="each.type !== 'inputText' && each.type === 'inputNumber'">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{each.label}}</mat-label>
+                    <input matInput type="number" [required]="each.required" ngModel name="{{each.key}}">
+                  </mat-form-field>
+                </div>
+
+                <div class="w-100" *ngIf="each.type !== 'inputNumber' && each.type === 'inputText'">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{each.label}}</mat-label>
+                    <input matInput type="text" [required]="each.required" ngModel name="{{each.key}}">
+                  </mat-form-field>
+                </div>
+
+                <div class="w-100" *ngIf="each.type === 'select'">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{each.label}}</mat-label>
+                    <select matNativeControl [required]="each.required" ngModel name="{{each.key}}">
+                      <option *ngFor="let eachValues of each.values" [value]="eachValues">{{eachValues}}</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+
+                <div class="w-100" *ngIf="each.type === 'selectDynamic'" >
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{each.label}}</mat-label>
+                    <select matNativeControl [required]="each.required" [disabled]="!this.selectDynamic[i]" (change)="action_input[i + 1] !== undefined ? dynamicSelector(action_input[i + 1]['function'], action_input[i + 1]['key'], $event.target.value, f.value, i) : test()" ngModel name="{{each.key}}">
+                      <option *ngFor="let eachOptions of this.selectDynamic[i]" [value]="eachOptions.key">{{eachOptions.label | titlecase}}</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div *ngIf="action_input && action_input.length === 0" class="text-center h-100 position-absolute w-100"
+                   style="display: flex; align-items: center; justify-content: center; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+                <div class="row" style="color: #8f8f8f">
+                  <div class="col-lg-12">
+                    <mat-icon>info</mat-icon>
+                  </div>
+                  <div class="col-lg-12">
+                    This sercices does not need parameters
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center position-absolute" style="bottom: 5%;left: 50%;transform: translateX(-50%);">
+                <button mat-button class="btn btn-custom pl-5 pr-5">Next step</button>
+              </div>
+            </form>
+          </div>
+        </mat-step>
+        <mat-step [editable]="isEditable">
+          <ng-template matStepLabel>Services reaction</ng-template>
+          <div class="row mt-3">
+            <div class="col-sm-5 w-100 p-3 grid-services custom-scrollbar"
+                 style="background-color: #f5f7fb; height: 520px; border-radius: 20px">
+              <div *ngFor="let each of this.services_activated; let i = index" class="grid-item h-100 text-center">
+                <input (click)="selectServicesReact(each)" type="checkbox" [id]="'cbr' + i" [disabled]="isDisabledReact.disabled === true && isDisabledReact.name !== each" />
+                <label [for]="'cbr' + i" class="text-center" style="margin-top: 5px">
+                  <img style="height: 60px; width: 60px; border-radius: 20px" [src]="'assets/services/' + each + '.png'" alt/>
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-2 w-100 text-center" style="background-color: white; height: 450px; position: relative">
+              <i style="font-size: 30px; color: #254c71; position: absolute; top: 50%; transform: translateY(-50%) translateX(-50%)" class="fas fa-arrow-right"></i>
+            </div>
+            <div class="col-sm-5 w-100 custom-scrollbar" style="height: 520px;">
+
+              <div *ngIf="this.reactions === undefined" class="text-center h-100"
+                   style="display: flex; align-items: center; justify-content: center">
+                <div class="row" style="color: #8f8f8f">
+                  <div class="col-lg-12">
+                    <mat-icon>info</mat-icon>
+                  </div>
+                  <div class="col-lg-12">
+                    Please select services
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="this.reactions == null && this.reactions !== undefined" class="text-center h-100"
+                   style="display: flex; align-items: center; justify-content: center">
+                <div class="row" style="color: #8f8f8f">
+                  <div class="col-lg-12">
+                    <mat-icon>info</mat-icon>
+                  </div>
+                  <div class="col-lg-12">
+                    There is no reaction on this service
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="this.reactions !== undefined">
+                <div *ngFor="let each of this.reactions; let i = index" (click)="selectReactions(each.name); stepper.next()" class="w-100 shadow p-2 mb-3 hover-card">
+                  <div class="font-proxima" style="font-size: 22px; color: #6a6a6a">{{formatTitle(each.name)}}</div>
+                  <div>{{each.description}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step [editable]="isEditable">
+          <ng-template matStepLabel>Reaction configuration</ng-template>
+
+          <div class="h-100 ml-auto mr-auto mt-5" style="max-width: 550px;">
+            <h4 class="font-proxima mb-4">Input configuration : {{this.isDisabledReact.name | titlecase}}</h4>
+            <form *ngIf="inputReaction !== undefined" class="position-relative" style="min-height: 470px; padding-bottom: 80px" [formGroup]="inputReaction" (ngSubmit)="submitReaction(inputReaction)">
+              <div *ngFor="let each of this.reaction_input; let i = index">
+
+                <div class="w-100" *ngIf="each.type === 'selectDynamic'" >
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{each.label}}</mat-label>
+                    <select matNativeControl [required]="each.required" [disabled]="!this.selectDynamicReactions[i]" (change)="reaction_input[i + 1] !== undefined ? dynamicSelectorReact(reaction_input[i + 1]['function'], reaction_input[i + 1]['key'], $event.target.value, inputReaction.value, i) : test()" formControlName="{{each.key}}">
+                      <option *ngFor="let eachOptions of this.selectDynamicReactions[i]" [value]="eachOptions.key">{{eachOptions.label | titlecase}}</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+
+                <div class="inputVar mb-3" *ngIf="each.type === 'inputText'">
+                  <mat-label style="font-weight: 500">{{each.label}}</mat-label>
+                  <div style="display: flex">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <input matInput type="text" style="display: none">
+                      <div formControlName="{{each.key}}" contenteditable="true" class="inputTest w-100" [id]="each.key"></div>
+                    </mat-form-field>
+                    <div class="dropdown" style="margin-bottom: 3px">
+                      <button type="button" class="btn no-outline" mat-button style="height: 60px; background: rgba(0,0,0,.12); color: white" [matMenuTriggerFor]="beforeMenu">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <mat-menu #beforeMenu="matMenu" xPosition="before">
+                        <button mat-menu-item *ngFor="let each_var of this.actions_var | keyvalue" (click)="appendDiv(each.key, each_var.key)" style="font-weight: 500">{{each_var.key | titlecase}}: <abbr
+                          style="color: #aaaaaa; font-style: italic">{{each_var.value}}</abbr></button>
+                      </mat-menu>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="w-100" *ngIf="each.type === 'select'">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{each.label}}</mat-label>
+                    <select matNativeControl [required]="each.required" formControlName="{{each.key}}">
+                      <option *ngFor="let eachValues of each.values" [value]="eachValues">{{eachValues}}</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+
+                <div class="w-100" *ngIf="each.type !== 'inputText' && each.type === 'inputNumber'">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>{{each.label}}</mat-label>
+                    <input matInput type="number" [required]="each.required" formControlName="{{each.key}}">
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div *ngIf="reaction_input && reaction_input.length === 0" class="text-center h-100 position-absolute w-100"
+                   style="display: flex; align-items: center; justify-content: center; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+                <div class="row" style="color: #8f8f8f">
+                  <div class="col-lg-12">
+                    <mat-icon>info</mat-icon>
+                  </div>
+                  <div class="col-lg-12">
+                    This sercices does not need parameters
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center position-absolute" style="bottom: 5%;left: 50%;transform: translateX(-50%);">
+                <button mat-button class="btn btn-custom pl-5 pr-5">Next step</button>
+              </div>
+            </form>
+          </div>
+
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+
+          <div class="h-100 ml-auto mr-auto mt-5" style="max-width: 550px;">
+
+            <form #c="ngForm" (ngSubmit)="c.valid && createArea(c.value)">
+
+                <mat-form-field class="w-100 mb-4" appearance="outline">
+                  <mat-label>Area name</mat-label>
+                  <input matInput type="text" [required]="true" ngModel name="name">
+                </mat-form-field>
+
+              <h5 class="font-proxima mb-4">Your area details</h5>
+
+              <div class="row mb-4">
+                <div class="col-lg-6">
+                  <mat-list role="list">
+                    <mat-list-item role="listitem"><img *ngIf="this.isDisabled.name" class="mr-2" style="height: 20px; border-radius: 5px" [src]="'assets/services/' + this.isDisabled.name + '.png'"/><abbr style="font-weight: 500">{{this.isDisabled.name | titlecase}}</abbr></mat-list-item>
+                    <mat-list-item role="listitem" class="ml-4 h-100 mb-2" *ngFor="let each of formActions | keyvalue"><i style="font-size: 10px; color: #254c71;" class="fas fa-arrow-right"></i> {{each.key | titlecase}}: <br><abbr style="color: #aaaaaa; font-style: italic">{{each.value}}</abbr></mat-list-item>
+                  </mat-list>
+                </div>
+                <div class="col-lg-6">
+                  <mat-list role="list">
+                    <mat-list-item role="listitem"><img *ngIf="this.isDisabledReact.name" class="mr-2" style="height: 20px; border-radius: 5px" [src]="'assets/services/' + this.isDisabledReact.name + '.png'"/><abbr style="font-weight: 500">{{this.isDisabledReact.name | titlecase}}</abbr></mat-list-item>
+                    <mat-list-item role="listitem" class="ml-4 h-100 mb-2" *ngFor="let each of formReactions | keyvalue"><i style="font-size: 10px; color: #254c71;" class="fas fa-arrow-right"></i> {{each.key | titlecase}}: <br><abbr style="color: #aaaaaa; font-style: italic">{{each.value}}</abbr></mat-list-item>
+                  </mat-list>
+                </div>
+              </div>
+
+              <div class="text-center mt-4">
+                <button mat-button class="btn btn-custom">Create area</button>
+              </div>
+            </form>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>
+
+<swal #swalSucess title="Success !" text="Your area has been created !" confirmButtonColor="#3085d6" (confirm)="route.navigate(['/usr/home'])"
+      confirmButtonText='Fermer' icon="success">
+</swal>
+
+<swal #swalError title="Error !" text="Something went wrong." confirmButtonColor="#3085d6" confirmButtonText='Fermer' icon="error" (confirm)="route.navigate(['/usr/create'])">
+</swal>
