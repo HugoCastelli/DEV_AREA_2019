@@ -49,7 +49,7 @@ export class AppletComponent implements OnInit {
   selectDynamic = [];
   selectDynamicReactions = [];
 
-  constructor(public http: HttpClient, private elementRef: ElementRef, private cdr: ChangeDetectorRef, private route: Router) {}
+  constructor(public http: HttpClient, private elementRef: ElementRef, private cdr: ChangeDetectorRef, public route: Router) {}
 
   selectServices(service): void {
     const requestServiceAction = this.baseUrl + '/services/' + service + '/actions';

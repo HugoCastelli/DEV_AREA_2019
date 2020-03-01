@@ -23,7 +23,6 @@ export interface Login {
 export class LoginComponent implements OnInit {
 
   myStyle: object = {};
-  myParams: object = {};
   width: number = 100;
   height: number = 100;
   baseUrl = 'http://localhost:8080';
@@ -95,20 +94,6 @@ export class LoginComponent implements OnInit {
       'left': 0,
       'right': 0,
       'bottom': 0,
-    };
-
-    this.myParams = {
-      particles: {
-        number: {
-          value: 200,
-        },
-        color: {
-          value: 'white'
-        },
-        shape: {
-          type: 'triangle',
-        },
-      }
     };
   }
 
