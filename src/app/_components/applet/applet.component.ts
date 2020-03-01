@@ -16,7 +16,7 @@ export class AppletComponent implements OnInit {
   @ViewChild('swalError', {static: false}) private swalError: SwalComponent;
   @ViewChild('stepper', {static: false}) public stepper: MatStepper;
   // baseUrl = 'http://10.101.52.237:3000';
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://api.ofiex.shop';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

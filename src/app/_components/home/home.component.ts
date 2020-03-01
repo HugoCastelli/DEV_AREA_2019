@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://api.ofiex.shop';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

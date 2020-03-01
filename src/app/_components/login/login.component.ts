@@ -23,9 +23,10 @@ export interface Login {
 export class LoginComponent implements OnInit {
 
   myStyle: object = {};
+  myParams: object = {};
   width: number = 100;
   height: number = 100;
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://api.ofiex.shop';
   signup = false;
   confirmPassword = '';
   redirect_uri;
