@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  baseUrl = 'http://api.ofiex.shop';
+  baseUrl = 'http://localhost:8080';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit {
   }
 
   active(service): any {
-    console.log(this.servicesActive)
     for (let each of Object.keys(this.servicesActive)) {
       if (each === service) {
         return true;

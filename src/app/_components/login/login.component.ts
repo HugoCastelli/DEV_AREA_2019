@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   myParams: object = {};
   width: number = 100;
   height: number = 100;
-  baseUrl = 'http://api.ofiex.shop';
+  baseUrl = 'http://localhost:8080';
   signup = false;
   confirmPassword = '';
   redirect_uri;

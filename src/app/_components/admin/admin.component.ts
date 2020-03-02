@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  baseUrl = 'http://api.ofiex.shop';
+  baseUrl = 'http://localhost:8080';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
