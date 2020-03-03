@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {HelpComponent} from './help/help.component';
 import {AppletComponent} from './applet/applet.component';
 import {AdminComponent} from './admin/admin.component';
+import {ApkComponent} from './apk/apk.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},

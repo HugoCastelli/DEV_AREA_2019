@@ -1,19 +1,76 @@
 <nav style="margin-top: 15px">
   <div class="nav-fostrap">
-    <div routerLink="/usr/home" style="position: absolute; left: 50%; transform: translate(-50%, -50%); top: 45px; cursor: pointer; outline: none" class="font-proxima">AREA</div>
+    <div
+      routerLink="/usr/home"
+      style="position: absolute; left: 50%; transform: translate(-50%, -50%); top: 45px; cursor: pointer; outline: none"
+      class="font-proxima"
+    >
+      AREA
+    </div>
     <ul>
-      <li class="responsiveMode"><a class="hover-btn font-proxima" routerLink="/usr/create" href="javascript:void(0)"><i class="fas fa-plus mr-1"></i> New area</a></li>
+      <li class="responsiveMode">
+        <a
+          class="hover-btn font-proxima"
+          routerLink="/usr/create"
+          href="javascript:void(0)"
+          ><i class="fas fa-plus mr-1"></i> New area</a
+        >
+      </li>
       <li class="responsiveMode" style="margin-right: 150px">
         <a href="Javascript:void(0)">
           <div ngbDropdown class="d-inline-block">
-            <div style="width: 30px; height: 30px;" id="dropdownBasic1" ngbDropdownToggle>
-              <img style="border-radius: 10px; margin-right: 5px" class="w-100 h-100" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" alt />
+            <div
+              style="width: 30px; height: 30px;"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              <img
+                style="border-radius: 10px; margin-right: 5px"
+                class="w-100 h-100"
+                src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg"
+                alt
+              />
             </div>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button routerLink="/usr/admin" style="padding: 10px; color: #3c434e" *ngIf="this.user.role === 'kingAdmin'" class="font-proxima" ngbDropdownItem>Admin</button>
-              <button routerLink="/usr/help" style="padding: 10px; color: #3c434e" class="font-proxima" ngbDropdownItem>Helper center</button>
+              <button
+                routerLink="/usr/admin"
+                style="padding: 10px; color: #3c434e"
+                *ngIf="this.user.role === 'kingAdmin'"
+                class="font-proxima"
+                ngbDropdownItem
+              >
+                Admin
+              </button>
+              <button
+                routerLink="/usr/help"
+                style="padding: 10px; color: #3c434e"
+                class="font-proxima"
+                ngbDropdownItem
+              >
+                Helper center
+              </button>
+              <a
+                style="padding: 0 !important;"
+                download="client.apk"
+                target="_blank"
+                href="assets/apk/build/outputs/apk/release/app-release.apk"
+                ><button
+                  style="padding: 10px; color: #3c434e"
+                  class="font-proxima"
+                  ngbDropdownItem
+                >
+                  Download APK
+                </button></a
+              >
               <div class="dropdown-divider"></div>
-              <button (click)="logOut()" style="padding: 10px; color: red" class="font-proxima" ngbDropdownItem><i class="fas fa-sign-out-alt"></i> Sign out</button>
+              <button
+                (click)="logOut()"
+                style="padding: 10px; color: red"
+                class="font-proxima"
+                ngbDropdownItem
+              >
+                <i class="fas fa-sign-out-alt"></i> Sign out
+              </button>
             </div>
           </div>
         </a>
@@ -21,16 +78,61 @@
 
       <!-- RESPONSIVE MODE -->
 
-      <li class="mobile"><a href="javascript:void(0)" routerLink="/usr/create" class="text-left font-roboto">New area</a></li>
-      <li *ngIf="this.user.role === 'kingAdmin'" class="mobile"><a href="javascript:void(0)" routerLink="/usr/admin" class="text-left font-roboto">Admin</a></li>
-      <li class="mobile"><a href="javascript:void(0)" routerLink="/usr/help" class="text-left font-roboto">Help center</a></li>
-      <li class="mobile"><a href="javascript:void(0)" (click)="logOut()" class="text-left font-roboto" style="color: red"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+      <li class="mobile">
+        <a
+          href="javascript:void(0)"
+          routerLink="/usr/create"
+          class="text-left font-roboto"
+          >New area</a
+        >
+      </li>
+      <li *ngIf="this.user.role === 'kingAdmin'" class="mobile">
+        <a
+          href="javascript:void(0)"
+          routerLink="/usr/admin"
+          class="text-left font-roboto"
+          >Admin</a
+        >
+      </li>
+      <li class="mobile">
+        <a
+          href="javascript:void(0)"
+          routerLink="/usr/help"
+          class="text-left font-roboto"
+          >Help center</a
+        >
+      </li>
+      <li class="mobile">
+        <a
+          download="client.apk"
+          target="_blank"
+          href="assets/apk/build/outputs/apk/release/app-release.apk"
+          class="text-left font-roboto"
+          >Download APK</a
+        >
+      </li>
+      <li class="mobile">
+        <a
+          href="javascript:void(0)"
+          (click)="logOut()"
+          class="text-left font-roboto"
+          style="color: red"
+          ><i class="fas fa-sign-out-alt"></i> Sign out</a
+        >
+      </li>
     </ul>
   </div>
 
-
   <div class="nav-bg-fostrap">
-    <div (click)="responsiveNav()" class="navbar-fostrap"> <span [ngClass]="{'sidenavOpen': sidenav, 'sidenavClose': !sidenav}" ></span> <span [ngClass]="{'sidenavOpen': sidenav, 'sidenavClose': !sidenav}"></span> <span [ngClass]="{'sidenavOpen': sidenav, 'sidenavClose': !sidenav}"></span> </div>
-    <b *ngIf="!this.sidenav"  class="font-proxima"><a href="javascript:void(0)" routerLink="/usr/home" class="title-mobile">Area</a></b>
+    <div (click)="responsiveNav()" class="navbar-fostrap">
+      <span [ngClass]="{ sidenavOpen: sidenav, sidenavClose: !sidenav }"></span>
+      <span [ngClass]="{ sidenavOpen: sidenav, sidenavClose: !sidenav }"></span>
+      <span [ngClass]="{ sidenavOpen: sidenav, sidenavClose: !sidenav }"></span>
+    </div>
+    <b *ngIf="!this.sidenav" class="font-proxima"
+      ><a href="javascript:void(0)" routerLink="/usr/home" class="title-mobile"
+        >Area</a
+      ></b
+    >
   </div>
 </nav>

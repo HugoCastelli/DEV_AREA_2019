@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LayoutBlankComponent } from './layout-blank.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('LayoutBlankComponent', () => {
   let component: LayoutBlankComponent;
@@ -8,7 +9,8 @@ describe('LayoutBlankComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LayoutBlankComponent ]
+      declarations: [ LayoutBlankComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

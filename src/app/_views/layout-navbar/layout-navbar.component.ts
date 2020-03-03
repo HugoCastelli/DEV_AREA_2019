@@ -8,12 +8,13 @@ import {SharedService} from '../../_helpers/shared.service';
 })
 export class LayoutNavbarComponent implements OnInit {
 
-  visible;
+  visible = false;
+
   constructor(private Shared: SharedService) {
   }
 
   ngOnInit() {
-    this.Shared.isVisible.subscribe((isVisible: boolean) => {
+    this.Shared.isVisible.subscribe((isVisible) => {
       this.visible = isVisible;
     });
   }

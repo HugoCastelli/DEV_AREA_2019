@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ComponentRoutingModule} from './page-routing.module';
 import {HomeComponent} from './home/home.component';
@@ -16,8 +16,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {TextInputHighlightModule} from 'angular-text-input-highlight';
 import {ContenteditableValueAccessorModule} from '@tinkoff/angular-contenteditable-accessor';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,8 @@ import {MatTableModule} from "@angular/material/table";
   ],
   providers: [
     SharedService
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageModule {
 }

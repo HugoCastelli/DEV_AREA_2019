@@ -1,5 +1,6 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {ApkComponent} from './apk/apk.component';
 import {LoginComponent} from './login/login.component';
 import {ComponentBlankRoutingModule} from './page-blank-routing.module';
 import {FormsModule} from '@angular/forms';
@@ -8,7 +9,8 @@ import {ParticlesModule} from "angular-particle";
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ApkComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import {ParticlesModule} from "angular-particle";
     FormsModule,
     PageModule,
     ParticlesModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageBlankModule {
 }
